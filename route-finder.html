@@ -1,135 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Routes Finder | Flight Cost Intelligence System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/dropdown.css">
-    <link rel="icon" href="https://img.icons8.com/fluency/48/airplane-mode-on.png" type="image/png">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Route Finder | Flight Cost Intelligence</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="icon" href="https://img.icons8.com/fluency/48/airplane-mode-on.png" type="image/png">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container header-container">
-            <div class="logo">
-                <a href="index.html"><i class="fas fa-plane"></i> Flight Cost Intelligence</a>
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-brand"><div class="brand-icon"><i class="fas fa-plane"></i></div>Flight Cost Intelligence</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li><li><a href="compare.html">Compare</a></li>
+      <li><a href="route-finder.html" class="active">Route Finder</a></li><li><a href="predictor.html">Predictor</a></li>
+      <li><a href="optimizer.html">Optimizer</a></li><li><a href="heatmap.html">Heatmap</a></li><li><a href="faq.html">FAQ</a></li>
+    </ul>
+    <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<section class="hero hero-sub">
+  <div class="container text-center">
+    <h1>Route Finder</h1>
+    <p>Pick a departure airport and discover every destination ranked by cost per kilometre.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group" style="flex:2;">
+            <label class="form-label">Departure Airport</label>
+            <div class="select-wrapper">
+              <select id="origin" class="form-control"><option value="">Loading…</option></select>
             </div>
-            <nav class="nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="compare.html" class="nav-link">Compare</a>
-
-                <a href="route-finder.html" class="nav-link active">Route Finder</a>
-                <a href="heatmap.html" class="nav-link">Heatmap</a>
-                <a href="faq.html" class="nav-link">FAQ</a>
-            </nav>
+          </div>
+          <div class="form-group" style="align-self:flex-end;">
+            <button id="find-btn" class="btn btn-primary btn-block"><i class="fas fa-route"></i> Find Best Routes</button>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+    <div id="results" style="display:none;"></div>
+  </div>
+</section>
+<footer class="footer"><div class="container"><div class="footer-bottom" style="border:none;padding:0;"><p>&copy; 2025 Flight Cost Intelligence. <a href="index.html" style="color:rgba(255,255,255,0.5);">Home</a></p></div></div></footer>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(async () => {
+  const airports = await fetchAirports();
+  fillSelect(document.getElementById('origin'), airports, 'Select departure airport');
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('origin')) {
+    document.getElementById('origin').value = p.get('origin');
+    setTimeout(() => document.getElementById('find-btn').click(), 300);
+  }
+})();
 
-    <!-- Page Title -->
-    <section class="page-title bg-primary">
-        <div class="container">
-            <h1 class="text-white">Route Finder</h1>
-            <p class="text-white">Find the best routes with lowest cost per kilometer and optimal travel months</p>
+document.getElementById('find-btn').addEventListener('click', async () => {
+  const origin = document.getElementById('origin').value;
+  if (!origin) { alert('Please select an origin airport.'); return; }
+
+  const res = document.getElementById('results');
+  res.style.display = 'block';
+  res.innerHTML = `<div class="spinner-wrap"><div class="spinner"></div><span>Finding best routes from ${origin}…</span></div>`;
+
+  try {
+    const d = await apiCall('/api/route-find', { findBestRoutes: true, origin });
+    if (!d.success || !d.data || !d.data.length) throw new Error(d.error || 'No routes found for this airport.');
+    const routes = d.data.sort((a, b) => a.cost_per_km - b.cost_per_km);
+    renderRoutes(routes, origin);
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {
+    res.innerHTML = `<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> ${e.message}</div>`;
+  }
+});
+
+function renderRoutes(routes, origin) {
+  const res = document.getElementById('results');
+  // Show best_travel_month AND best_booking_time (FIX: was only showing month)
+  const rows = routes.map((r, i) => `
+    <tr class="${i===0?'best-row':''}">
+      <td><span class="badge ${i===0?'badge-blue':'badge-gray'}">#${i+1}</span></td>
+      <td><span class="font-mono fw-bold">${r.destination}</span><br><small class="text-muted">${getAirportCity(r.destination)}</small></td>
+      <td class="font-mono">${fmtDist(r.distance)}</td>
+      <td class="fw-bold">${fmtPrice(r.price)}</td>
+      <td><span class="fw-bold ${i===0?'text-primary-color':''}">${fmtCPK(r.cost_per_km)}</span></td>
+      <td>${r.best_travel_month ? `<span class="badge badge-amber">${r.best_travel_month}</span>` : '<span class="text-muted">—</span>'}</td>
+      <td style="font-size:0.82rem;color:var(--text-secondary);">${r.best_booking_time || '<span class="text-muted">—</span>'}</td>
+      <td>
+        <a href="compare.html?o0=${origin}&d0=${r.destination}" class="btn btn-sm btn-primary">Compare</a>
+        <a href="predictor.html?origin=${origin}&destination=${r.destination}" class="btn btn-sm btn-ghost" style="margin-left:4px;">Trends</a>
+      </td>
+    </tr>`).join('');
+
+  res.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <h3>Best routes from <span class="font-mono">${origin}</span> (${getAirportCity(origin)})</h3>
+        <span class="badge badge-gray">${routes.length} routes</span>
+      </div>
+      <div class="card-body" style="padding:0;">
+        <div class="table-wrapper" style="border:none;border-radius:0;">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th><th>Destination</th><th>Distance</th><th>Price</th>
+                <th>₹/km</th><th>Best Month</th><th>Best Booking Time</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
         </div>
-    </section>
-
-    <!-- Route Finder Section -->
-    <section class="route-finder-section p-5">
-        <div class="container">
-            <div class="route-finder-container">
-                <!-- Origin Selection Form -->
-                <div class="origin-form">
-                    <h2>Select Origin Airport</h2>
-                    <p>Choose an origin airport to see the best routes and optimal travel times</p>
-                    
-                    <div class="form-group mt-4">
-                        <label for="origin" class="form-label">Origin Airport</label>
-                        <select id="origin" class="form-select" required>
-                            <option value="">Select Airport</option>
-                        </select>
-                    </div>
-
-                    <div class="form-actions mt-3">
-                        <button id="find-routes-btn" class="btn btn-primary">
-                            <i class="fas fa-search"></i> Find Best Routes
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Results Container -->
-                <div id="results-container" class="results-container mt-5" style="display: none;">
-                    <h2 id="results-title">Best Routes from <span id="selected-origin"></span></h2>
-                    <p class="text-muted">Routes sorted by cost per kilometer (lowest first)</p>
-                    
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h3><i class="fas fa-route"></i> Best Value Routes</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead class="table-primary">
-                                        <tr>
-                                            <th>Destination</th>
-                                            <th>Distance (km)</th>
-                                            <th>Price</th>
-                                            <th>Cost per km</th>
-                                            <th>Best Month to Travel</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="routes-table-body">
-                                        <!-- Routes will be populated here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Trend container removed as requested -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Flight Cost Intelligence</h3>
-                    <p>Making air travel more transparent and cost-effective through per-kilometer analysis.</p>
-                </div>
-
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="compare.html">Compare</a></li>
-                        <li><a href="predictor.html">Predictor</a></li>
-                        <li><a href="optimizer.html">Optimizer</a></li>
-                        <li><a href="route-finder.html">Route Finder</a></li>
-                        <li><a href="heatmap.html">Heatmap</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h3>About Us</h3>
-                    <p>Flight Cost Intelligence is a cutting-edge platform designed to help travelers make informed decisions through data-driven insights.</p>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Flight Cost Intelligence System. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="assets/js/config.js"></script>
-    <script src="assets/js/route-finder.js"></script>
+      </div>
+    </div>`;
+}
+</script>
 </body>
 </html>

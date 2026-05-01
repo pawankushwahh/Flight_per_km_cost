@@ -5,34 +5,28 @@
 
 const CONFIG = {
     // API base URL - using Render deployed backend
-    // API_BASE_URL: 'http://127.0.0.1:5000',
     API_BASE_URL: 'https://flight-cost-intelligence-api.onrender.com',
-
     
     // API endpoints with their HTTP methods
     ENDPOINTS: {
         COMPARE: '/api/compare',
-        TREND_ROUTES: '/api/trend-routes',
-        TREND_DATA: '/api/trend-data',
-        COMPARE_TRENDS: '/api/compare-trends',
+        PREDICT: '/api/predict',
         NEARBY_AIRPORTS: '/api/nearby-airports',
         CLASS_LAYOVER: '/api/class-layover',
         HEATMAP: '/api/heatmap',
         AIRPORTS: '/api/airports',
-        ROUTE_FIND: '/api/route-find'
+        DUMMY_COMPARE: '/api/route-find'
     },
     
     // HTTP methods for each endpoint
     HTTP_METHODS: {
         COMPARE: 'POST',
-        TREND_ROUTES: 'GET',
-        TREND_DATA: 'GET',
-        COMPARE_TRENDS: 'POST',
+        PREDICT: 'POST',
         NEARBY_AIRPORTS: 'GET',
         CLASS_LAYOVER: 'GET',
         HEATMAP: 'GET',
         AIRPORTS: 'GET',
-        ROUTE_FIND: 'POST'
+        DUMMY_COMPARE: 'POST'
     },
     
     // Indian airport codes for quick selection
