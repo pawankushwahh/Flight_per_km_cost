@@ -25,6 +25,8 @@
       width:28px; height:28px; border-radius:var(--radius-sm);
       display:grid; place-items:center; font-size:0.78rem; font-weight:700; flex-shrink:0;
     }
+    .heatmap-layout { display:grid; grid-template-columns:1fr 320px; gap:24px; align-items:start; }
+    @media(max-width:900px){ .heatmap-layout { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -36,13 +38,18 @@
       <li><a href="route-finder.html">Route Finder</a></li><li><a href="predictor.html">Predictor</a></li>
       <li><a href="optimizer.html">Optimizer</a></li>
       <li><a href="heatmap.html" class="active">Heatmap</a></li>
+      <li><a href="visualizations.html">Visualizations</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
     <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
-<section class="hero hero-sub">
+<section class="hero hero-sub" data-hero="heatmap">
+  <div class="hero-bg">
+    <img src="assets/images/sub-hero-heatmap.jpg" alt="Color-coded geographic map visualization">
+  </div>
+  <div class="hero-overlay"></div>
   <div class="container text-center">
     <h1>India Flight Cost Heatmap</h1>
     <p>Visual overview of flight cost intensity across Indian airports. Darker = more expensive per km.</p>
@@ -51,7 +58,7 @@
 
 <section class="section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;">
+    <div class="heatmap-layout">
       <!-- Map -->
       <div class="card">
         <div class="card-header">
@@ -137,6 +144,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="assets/js/config.js"></script>
+<script src="assets/js/images.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
 let mapInst = null;
@@ -236,14 +244,28 @@ async function loadData() {
     let routes = [];
     try {
       const h = await apiCall('/api/heatmap');
-      if (h.success && h.data && (h.data.routes || Array.isArray(h.data))) {
-        routes = h.data.routes || h.data;
+      if (h.success && h.data) {
+        if (h.data.routes && h.data.routes.length) {
+          routes = h.data.routes;
+        } else if (h.data.regions) {
+          h.data.regions.forEach(region => {
+            (region.states || []).forEach(state => {
+              (state.routes || []).forEach(r => {
+                routes.push({
+                  origin: r.from || r.origin,
+                  destination: r.to || r.destination,
+                  cost_per_km: r.cost_per_km,
+                });
+              });
+            });
+          });
+        }
       }
     } catch(e) {}
 
-    // Fallback to compare data
+    // Fallback to enriched compare data
     if (!routes.length) {
-      const c = await apiCall('/api/raw-compare-data?limit=50');
+      const c = await apiCall('/api/raw-compare-data?limit=120');
       if (c.success && c.data && c.data.routes) routes = c.data.routes;
     }
 

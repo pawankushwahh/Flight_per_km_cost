@@ -11,6 +11,41 @@
   if (toggle && links) toggle.addEventListener('click', () => links.classList.toggle('open'));
 })();
 
+// ── Navbar scroll effect ──────────────────────────────────────
+(function () {
+  const nav = document.querySelector('.navbar');
+  if (!nav) return;
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+// ── Scroll reveal ─────────────────────────────────────────────
+window.initReveal = function initReveal() {
+  const els = document.querySelectorAll('.reveal:not(.visible)');
+  if (!els.length || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => observer.observe(el));
+};
+document.addEventListener('DOMContentLoaded', () => window.initReveal());
+
+// ── Warm up backend (Render free-tier cold start) ─────────────
+(function () {
+  if (typeof CONFIG !== 'undefined' && CONFIG.API_BASE_URL) {
+    fetch(CONFIG.API_BASE_URL + '/api/ping', { mode: 'cors' }).catch(() => {});
+  }
+})();
+
 // ── Static fallback airports ──────────────────────────────────
 const STATIC_AIRPORTS = [
   { code:'DEL', name:'Indira Gandhi International',              city:'Delhi',           lat:28.5665, lon:77.1031 },
@@ -72,9 +107,10 @@ function _showColdStartBanner() {
       Waking up the server — this takes up to 30 seconds on first load…`;
     Object.assign(el.style, {
       position: 'fixed', bottom: '20px', left: '50%', transform: 'translateX(-50%)',
-      background: '#1E3460', color: '#fff', padding: '12px 24px',
+      background: 'rgba(12, 12, 18, 0.95)', color: '#fff', padding: '12px 24px',
       borderRadius: '99px', fontSize: '13px', fontWeight: '500',
-      zIndex: '9999', boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+      zIndex: '9999', boxShadow: '0 4px 24px rgba(0,0,0,0.5)',
+      border: '1px solid rgba(249, 115, 22, 0.3)',
       whiteSpace: 'nowrap', fontFamily: 'inherit',
     });
     document.body.appendChild(el);

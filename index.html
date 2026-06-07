@@ -22,22 +22,38 @@
       <li><a href="predictor.html">Predictor</a></li>
       <li><a href="optimizer.html">Optimizer</a></li>
       <li><a href="heatmap.html">Heatmap</a></li>
+      <li><a href="visualizations.html">Visualizations</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
     <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
   </div>
 </nav>
+
 <section class="hero">
+  <div class="hero-bg">
+    <img src="assets/images/hero-bg.jpg" alt="Airplane wing above clouds at sunset">
+  </div>
+  <div class="hero-overlay"></div>
   <div class="container">
-    <div style="max-width:640px;">
-      <span class="badge badge-amber animate-in" style="margin-bottom:16px;display:inline-flex;">
-        <i class="fas fa-star" style="font-size:10px;"></i>&nbsp; India's flight cost-per-km analyser
-      </span>
-      <h1 class="animate-in animate-in-2">Find the <span class="accent">smartest</span> flight deals — by the kilometre</h1>
-      <p class="animate-in animate-in-3" style="font-size:1.05rem;margin-top:12px;">Stop comparing total prices. Compare ₹ per km across every Indian route to see which flight actually gives you more value.</p>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="badge badge-amber animate-in" style="margin-bottom:18px;">
+          <i class="fas fa-star" style="font-size:10px;"></i>&nbsp; India's flight cost-per-km analyser
+        </span>
+        <h1 class="animate-in animate-in-2">Find the <span class="accent">smartest</span> flight deals — by the kilometre</h1>
+        <p class="animate-in animate-in-3">Stop comparing total prices. Compare ₹ per km across every Indian route to see which flight actually gives you more value.</p>
+        <div class="hero-actions animate-in" style="animation-delay:0.35s;">
+          <a href="compare.html" class="btn btn-primary btn-lg"><i class="fas fa-balance-scale"></i> Start Comparing</a>
+          <a href="route-finder.html" class="btn btn-outline btn-lg"><i class="fas fa-route"></i> Explore Routes</a>
+        </div>
+      </div>
+      <div class="hero-visual animate-in" style="animation-delay:0.2s;">
+        <img src="assets/images/hero-airport.jpg" alt="Modern airport terminal with travellers">
+        <div class="hero-visual-badge"><i class="fas fa-chart-line" style="color:var(--accent);margin-right:6px;"></i> Live ₹/km analysis across India</div>
+      </div>
     </div>
-    <div class="search-box animate-in" style="animation-delay:0.25s;max-width:700px;margin-top:0;">
-      <p style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-secondary);margin-bottom:16px;">Quick Compare</p>
+    <div class="search-box animate-in reveal" style="animation-delay:0.4s;margin-top:48px;">
+      <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);margin-bottom:18px;">Quick Compare</p>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">From</label>
@@ -54,64 +70,102 @@
     </div>
   </div>
 </section>
-<div class="container" style="margin-top:-1px;">
-  <div class="stats-bar">
+
+<div class="container">
+  <div class="stats-bar reveal">
     <div class="stat-item"><div class="stat-value">50<span>+</span></div><div class="stat-label">Routes Analysed</div></div>
     <div class="stat-item"><div class="stat-value">₹<span>4.8</span></div><div class="stat-label">Avg ₹/km India</div></div>
     <div class="stat-item"><div class="stat-value">9<span>+</span></div><div class="stat-label">Analysis Tools</div></div>
     <div class="stat-item"><div class="stat-value">100<span>%</span></div><div class="stat-label">Free to Use</div></div>
   </div>
 </div>
+
 <section class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header center reveal">
+      <span class="section-label"><i class="fas fa-tools"></i> Tools</span>
       <h2>Six ways to analyse your next flight</h2>
       <p>Every tool is powered by the same backend — choose the view that answers your question fastest.</p>
     </div>
     <div class="feature-grid">
-      <a href="compare.html" class="feature-card">
-        <div class="feature-icon blue"><i class="fas fa-balance-scale"></i></div>
-        <h3>Compare Routes</h3>
-        <p>Side-by-side cost-per-km comparison with interactive chart and route map.</p>
-        <div class="feature-arrow">Compare now <i class="fas fa-arrow-right"></i></div>
+      <a href="compare.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-compare.jpg" alt="Flight comparison analytics">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon blue"><i class="fas fa-balance-scale"></i></div>
+          <h3>Compare Routes</h3>
+          <p>Side-by-side cost-per-km comparison with interactive chart and route map.</p>
+          <div class="feature-arrow">Compare now <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
-      <a href="predictor.html" class="feature-card">
-        <div class="feature-icon amber"><i class="fas fa-chart-line"></i></div>
-        <h3>Price Trends</h3>
-        <p>Monthly price patterns and best-booking-time advice for any Indian route.</p>
-        <div class="feature-arrow">View trends <i class="fas fa-arrow-right"></i></div>
+      <a href="predictor.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-predictor.jpg" alt="Price trend charts on screen">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon amber"><i class="fas fa-chart-line"></i></div>
+          <h3>Price Trends</h3>
+          <p>Monthly price patterns and best-booking-time advice for any Indian route.</p>
+          <div class="feature-arrow">View trends <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
-      <a href="route-finder.html" class="feature-card">
-        <div class="feature-icon teal"><i class="fas fa-route"></i></div>
-        <h3>Route Finder</h3>
-        <p>Pick a departure city and see every destination ranked by cost per km.</p>
-        <div class="feature-arrow">Find routes <i class="fas fa-arrow-right"></i></div>
+      <a href="route-finder.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-route-finder.jpg" alt="Travel planning with map and passport">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon teal"><i class="fas fa-route"></i></div>
+          <h3>Route Finder</h3>
+          <p>Pick a departure city and see every destination ranked by cost per km.</p>
+          <div class="feature-arrow">Find routes <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
-      <a href="optimizer.html" class="feature-card">
-        <div class="feature-icon green"><i class="fas fa-map-marker-alt"></i></div>
-        <h3>Route Optimizer</h3>
-        <p>Discover nearby alternative airports and whether layovers could save you money.</p>
-        <div class="feature-arrow">Optimize <i class="fas fa-arrow-right"></i></div>
+      <a href="optimizer.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-optimizer.jpg" alt="Airport runway at dusk">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon green"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>Route Optimizer</h3>
+          <p>Discover nearby alternative airports and whether layovers could save you money.</p>
+          <div class="feature-arrow">Optimize <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
-      <a href="heatmap.html" class="feature-card">
-        <div class="feature-icon blue"><i class="fas fa-globe-asia"></i></div>
-        <h3>Cost Heatmap</h3>
-        <p>A geographic view of flight costs across India — spot bargain regions at a glance.</p>
-        <div class="feature-arrow">View map <i class="fas fa-arrow-right"></i></div>
+      <a href="heatmap.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-heatmap.jpg" alt="Geographic map visualization">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon blue"><i class="fas fa-globe-asia"></i></div>
+          <h3>Cost Heatmap</h3>
+          <p>A geographic view of flight costs across India — spot bargain regions at a glance.</p>
+          <div class="feature-arrow">View map <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
-      <a href="visualizations.html" class="feature-card">
-        <div class="feature-icon amber"><i class="fas fa-chart-bar"></i></div>
-        <h3>Visualizations</h3>
-        <p>Advanced charts: top cheapest routes, most expensive routes, and city averages.</p>
-        <div class="feature-arrow">Explore data <i class="fas fa-arrow-right"></i></div>
+      <a href="visualizations.html" class="feature-card reveal">
+        <div class="feature-card-img">
+          <img src="assets/images/hero-visualizations.jpg" alt="Data visualization dashboard">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-icon amber"><i class="fas fa-chart-bar"></i></div>
+          <h3>Visualizations</h3>
+          <p>Advanced charts: top cheapest routes, most expensive routes, and city averages.</p>
+          <div class="feature-arrow">Explore data <i class="fas fa-arrow-right"></i></div>
+        </div>
       </a>
     </div>
   </div>
 </section>
-<section class="section" style="background:var(--gray-50);padding-top:48px;padding-bottom:48px;">
+
+<section class="section section-alt">
   <div class="container">
-    <div class="d-flex justify-between align-center flex-wrap gap-2 mb-3">
-      <div><h2 style="margin-bottom:4px;">Popular Indian Routes</h2><p style="margin:0;">Sorted by cost-per-km — lowest first.</p></div>
+    <div class="d-flex justify-between align-center flex-wrap gap-2 mb-3 reveal">
+      <div>
+        <span class="section-label"><i class="fas fa-fire"></i> Trending</span>
+        <h2 style="margin-bottom:6px;">Popular Indian Routes</h2>
+        <p style="margin:0;">Sorted by cost-per-km — lowest first.</p>
+      </div>
     </div>
     <div id="routes-loading" class="spinner-wrap"><div class="spinner"></div><span>Loading routes…</span></div>
     <div id="routes-grid" class="routes-grid" style="display:none;"></div>
@@ -120,24 +174,130 @@
     </div>
   </div>
 </section>
+
 <section class="section">
   <div class="container">
-    <div class="section-header center"><h2>How it works</h2><p>Three steps to smarter flight decisions.</p></div>
-    <div class="steps-grid">
-      <div class="step-card"><div class="step-number">1</div><h3>Pick your routes</h3><p>Select any origin and destination pair. Add multiple routes for a side-by-side comparison.</p></div>
-      <div class="step-card"><div class="step-number">2</div><h3>See the ₹/km breakdown</h3><p>The backend returns each route's total price, distance, and cost per kilometre.</p></div>
-      <div class="step-card"><div class="step-number">3</div><h3>Make a better booking</h3><p>Use the trend predictor and optimizer to time your booking and find cheaper nearby airports.</p></div>
+    <div class="split-section reveal">
+      <div class="split-content">
+        <span class="section-label"><i class="fas fa-info-circle"></i> About</span>
+        <h2 style="margin-bottom:16px;">Making Indian air travel transparent</h2>
+        <p style="margin-bottom:16px;">Flight Cost Intelligence turns raw fare data into actionable insights. Instead of guessing whether a ₹5,000 ticket is a good deal, we show you exactly how much you're paying per kilometre — so you can compare routes fairly, regardless of distance.</p>
+        <p style="margin-bottom:24px;">Built for travellers, analysts, and anyone who wants smarter domestic flight decisions — completely free, no account required.</p>
+        <a href="faq.html" class="btn btn-ghost"><i class="fas fa-question-circle"></i> Learn more in FAQ</a>
+      </div>
+      <div class="split-image">
+        <img src="assets/images/hero-faq.jpg" alt="Modern data workspace with analytics screens">
+      </div>
     </div>
   </div>
 </section>
-<section class="cta-section">
+
+<section class="section section-alt">
   <div class="container">
-    <div class="cta-inner">
-      <div class="cta-text"><h2>Ready to find the best value flight?</h2><p>Start comparing routes for free — no account needed.</p></div>
+    <div class="section-header center reveal">
+      <span class="section-label"><i class="fas fa-list-ol"></i> Process</span>
+      <h2>How it works</h2>
+      <p>Three steps to smarter flight decisions.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-card-img">
+          <img src="assets/images/step-planning.jpg" alt="Person planning travel on laptop">
+        </div>
+        <div class="step-card-content">
+          <div class="step-number">1</div>
+          <h3>Pick your routes</h3>
+          <p>Select any origin and destination pair. Add multiple routes for a side-by-side comparison.</p>
+        </div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-card-img">
+          <img src="assets/images/step-analysis.jpg" alt="Data analysis on dashboard">
+        </div>
+        <div class="step-card-content">
+          <div class="step-number">2</div>
+          <h3>See the ₹/km breakdown</h3>
+          <p>The backend returns each route's total price, distance, and cost per kilometre.</p>
+        </div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-card-img">
+          <img src="assets/images/step-booking.jpg" alt="Traveller at airport departure gate">
+        </div>
+        <div class="step-card-content">
+          <div class="step-number">3</div>
+          <h3>Make a better booking</h3>
+          <p>Use the trend predictor and optimizer to time your booking and find cheaper nearby airports.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label"><i class="fas fa-quote-left"></i> Testimonials</span>
+      <h2>Trusted by smart travellers</h2>
+      <p>See how cost-per-km analysis changes the way people book domestic flights.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">"I always thought shorter flights were cheaper. This tool showed me that my Delhi–Bangalore route at ₹4.2/km was actually a better deal than my Pune trip at ₹7/km. Game changer."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="assets/images/avatar-1.jpg" alt="Rahul Sharma">
+          </div>
+          <div>
+            <div class="testimonial-name">Rahul Sharma</div>
+            <div class="testimonial-role">Frequent flyer, Delhi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">"The price predictor helped me book my Goa trip two months early and save 18%. The monthly chart makes it so easy to see when fares dip."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="assets/images/avatar-2.jpg" alt="Priya Mehta">
+          </div>
+          <div>
+            <div class="testimonial-name">Priya Mehta</div>
+            <div class="testimonial-role">Travel blogger, Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-quote">"The route optimizer found a nearby airport that cut my fare by ₹1,200. I never would have thought to check alternative departure points without this."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">
+            <img src="assets/images/avatar-3.jpg" alt="Arjun Patel">
+          </div>
+          <div>
+            <div class="testimonial-name">Arjun Patel</div>
+            <div class="testimonial-role">Business traveller, Bangalore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-bg">
+    <img src="assets/images/hero-cta.jpg" alt="Airplane flying through clouds">
+  </div>
+  <div class="cta-overlay"></div>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="cta-text">
+        <h2>Ready to find the best value flight?</h2>
+        <p>Start comparing routes for free — no account needed.</p>
+      </div>
       <a href="compare.html" class="btn btn-amber btn-lg">Start Comparing <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -147,38 +307,82 @@
       </div>
       <div class="footer-col"><h4>Tools</h4><ul class="footer-links"><li><a href="compare.html">Route Comparison</a></li><li><a href="predictor.html">Price Predictor</a></li><li><a href="route-finder.html">Route Finder</a></li><li><a href="optimizer.html">Optimizer</a></li><li><a href="heatmap.html">Heatmap</a></li></ul></div>
       <div class="footer-col"><h4>Info</h4><ul class="footer-links"><li><a href="faq.html">FAQ</a></li><li><a href="visualizations.html">Visualizations</a></li></ul></div>
-      <div class="footer-col"><h4>About</h4><p style="font-size:0.875rem;line-height:1.6;">A data-driven tool for Indian domestic flight cost analysis. All prices are indicative.</p><p style="font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:8px;"><i class="fas fa-map-marker-alt"></i> New Delhi, India</p></div>
+      <div class="footer-col"><h4>About</h4><p style="font-size:0.875rem;line-height:1.7;color:var(--text-secondary);">A data-driven tool for Indian domestic flight cost analysis. All prices are indicative.</p><p style="font-size:0.8rem;color:var(--text-muted);margin-top:10px;"><i class="fas fa-map-marker-alt"></i> New Delhi, India</p></div>
     </div>
     <div class="footer-bottom"><p>&copy; 2025 Flight Cost Intelligence System. All rights reserved.</p></div>
   </div>
 </footer>
+
 <script src="assets/js/config.js"></script>
+<script src="assets/js/images.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-const AVG_CPK=4.8;
+let AVG_CPK=4.8;
+
 function createRouteCard(r){
   const sav=Math.round((AVG_CPK-r.cost_per_km)/AVG_CPK*100);
   const savHtml=sav>0?`<span class="badge badge-green">${sav}% below avg</span>`:`<span class="badge badge-gray">${Math.abs(sav)}% above avg</span>`;
-  return `<div class="route-card"><div class="route-airports"><div><div class="airport-code">${r.origin}</div><div class="airport-label">Origin</div></div><div class="route-line"><div class="route-line-bar"></div><div class="route-dist">${Math.round(r.distance).toLocaleString()} km</div></div><div><div class="airport-code">${r.destination}</div><div class="airport-label">Destination</div></div></div><div class="route-meta"><div><div class="cost-per-km">&#8377;${r.cost_per_km.toFixed(2)}<span class="unit">/km</span></div><div style="margin-top:4px;">${savHtml}</div></div><div class="text-right"><div class="total-price">&#8377;${Math.round(r.price).toLocaleString()}</div><a href="compare.html?origin=${r.origin}&destination=${r.destination}" class="btn btn-sm btn-primary" style="margin-top:8px;">Compare <i class="fas fa-arrow-right"></i></a></div></div></div>`;
+  const img = routeImage(r.destination);
+  return `<div class="route-card reveal">
+    <div class="route-card-thumb"><img src="${img}" alt="Route to ${r.destination}" loading="lazy"></div>
+    <div class="route-card-body">
+      <div class="route-airports">
+        <div><div class="airport-code">${r.origin}</div><div class="airport-label">Origin</div></div>
+        <div class="route-line"><div class="route-line-bar"></div><div class="route-dist">${Math.round(r.distance).toLocaleString()} km</div></div>
+        <div><div class="airport-code">${r.destination}</div><div class="airport-label">Destination</div></div>
+      </div>
+      <div class="route-meta">
+        <div><div class="cost-per-km">&#8377;${r.cost_per_km.toFixed(2)}<span class="unit">/km</span></div><div style="margin-top:6px;">${savHtml}</div></div>
+        <div class="text-right"><div class="total-price">&#8377;${Math.round(r.price).toLocaleString()}</div><a href="compare.html?origin=${r.origin}&destination=${r.destination}" class="btn btn-sm btn-primary" style="margin-top:10px;">Compare <i class="fas fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+  </div>`;
 }
+
+function normalizeRoute(rt) {
+  const origin = rt.origin || rt.Start || '';
+  const destination = rt.destination || rt.End || '';
+  const distance = parseFloat(rt.distance ?? rt.Distance) || 0;
+  const price = parseFloat(rt.price ?? rt.Price) || 0;
+  let cost_per_km = parseFloat(rt.cost_per_km ?? rt.CostPerKm);
+  if (!cost_per_km && price > 0 && distance > 0) cost_per_km = price / distance;
+  return { origin, destination, distance, price, cost_per_km };
+}
+
 async function loadRoutes(){
   const loading=document.getElementById('routes-loading');
   const grid=document.getElementById('routes-grid');
   const morewrap=document.getElementById('show-more-wrap');
   try{
-    const r=await fetch(`${CONFIG.API_BASE_URL}/api/raw-compare-data?limit=20`);
-    const d=await r.json();
-    let routes=[];
-    if(d.success&&d.data&&d.data.routes){
-      routes=d.data.routes.filter(rt=>rt.cost_per_km||(rt.price&&rt.distance)).map(rt=>({...rt,cost_per_km:rt.cost_per_km||rt.price/rt.distance})).sort((a,b)=>a.cost_per_km-b.cost_per_km).slice(0,12);
+    let routes = [];
+
+    // Primary: enriched raw compare data
+    try {
+      const d = await apiCall('/api/raw-compare-data?limit=20');
+      if (d.success && d.data && d.data.routes) {
+        routes = d.data.routes.map(normalizeRoute).filter(r => r.origin && r.destination && r.cost_per_km > 0);
+      }
+    } catch (e) { /* try fallback */ }
+
+    // Fallback: visualizations (works when raw data lacks distance/cost_per_km)
+    if (!routes.length) {
+      const v = await apiCall('/api/visualizations?limit=12');
+      if (v.success && v.data && v.data.topCheapestRoutes) {
+        routes = v.data.topCheapestRoutes.map(normalizeRoute).filter(r => r.origin && r.destination && r.cost_per_km > 0);
+      }
     }
-    if(!routes.length)throw new Error('no data');
-    window._allRoutes=routes;
-    grid.innerHTML=routes.slice(0,6).map(createRouteCard).join('');
-    loading.style.display='none';grid.style.display='grid';
-    if(routes.length>6)morewrap.style.display='block';
-  }catch(e){
-    loading.innerHTML='<div class="alert alert-warning"><i class="fas fa-info-circle"></i> Could not load live route data. Please try again later.</div>';
+
+    if (!routes.length) throw new Error('no data');
+
+    routes.sort((a, b) => a.cost_per_km - b.cost_per_km);
+    window._allRoutes = routes;
+    grid.innerHTML = routes.slice(0, 6).map(createRouteCard).join('');
+    loading.style.display = 'none';
+    grid.style.display = 'grid';
+    if (routes.length > 6) morewrap.style.display = 'block';
+    if (window.initReveal) window.initReveal();
+  } catch (e) {
+    loading.innerHTML = '<div class="alert alert-warning"><i class="fas fa-info-circle"></i> Could not load route data. Make sure the backend is running at <code style="font-size:0.85em;">' + CONFIG.API_BASE_URL + '</code> and refresh the page.</div>';
   }
 }
 document.getElementById('show-more-btn').addEventListener('click',()=>{
@@ -188,8 +392,42 @@ document.getElementById('show-more-btn').addEventListener('click',()=>{
   const more=all.slice(shown,shown+6);
   grid.innerHTML+=more.map(createRouteCard).join('');
   if(shown+more.length>=all.length)document.getElementById('show-more-wrap').style.display='none';
+  if (window.initReveal) window.initReveal();
 });
 loadRoutes();
+
+(async function initQuickCompare() {
+  const airports = await fetchAirports();
+  fillSelect(document.getElementById('qs-origin'), airports, 'Select origin');
+  fillSelect(document.getElementById('qs-destination'), airports, 'Select destination');
+  document.getElementById('qs-btn').addEventListener('click', () => {
+    const o = document.getElementById('qs-origin').value;
+    const d = document.getElementById('qs-destination').value;
+    if (!o || !d) { alert('Please select both origin and destination.'); return; }
+    if (o === d) { alert('Origin and destination must be different.'); return; }
+    window.location.href = `compare.html?origin=${o}&destination=${d}`;
+  });
+})();
+
+(async function loadStats() {
+  try {
+    const r = await apiCall('/api/visualizations?limit=1');
+    if (r.success && r.data) {
+      const routeCount = await fetch(`${CONFIG.API_BASE_URL}/api/raw-compare-data?limit=200`)
+        .then(res => res.json())
+        .then(d => (d.success && d.data && d.data.routes) ? d.data.routes.length : 0);
+      if (routeCount) {
+        document.querySelector('.stats-bar .stat-item:nth-child(1) .stat-value').innerHTML =
+          routeCount + '<span>+</span>';
+      }
+      if (r.data.averageCostPerKm) {
+        AVG_CPK = r.data.averageCostPerKm;
+        document.querySelector('.stats-bar .stat-item:nth-child(2) .stat-value').innerHTML =
+          '₹' + AVG_CPK.toFixed(1);
+      }
+    }
+  } catch (e) { /* keep hardcoded fallbacks */ }
+})();
 </script>
 </body>
 </html>

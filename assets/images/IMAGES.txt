@@ -1,0 +1,283 @@
+FLIGHT COST INTELLIGENCE — LOCAL IMAGE GUIDE
+================================================
+Folder: frontend/assets/images/
+Use these exact filenames. Formats: .jpg, .jpeg, .png, or .webp
+
+General tips for ALL images:
+  - Prefer landscape (wide) for heroes and cards; square for avatars
+  - Dark or muted photos work best (site uses a dark theme + gradient overlays)
+  - Avoid busy text, logos, or watermarks in the image
+  - High quality, slightly desaturated photos look most premium
+
+
+================================================================================
+HERO & BACKGROUND IMAGES (wide landscape, 1600×900 or larger)
+================================================================================
+
+hero-bg.jpg
+  TYPE:     Cinematic aviation / travel background
+  SUBJECT:  Airplane wing above clouds at sunset or sunrise; OR view from
+            plane window with sky and clouds; OR aircraft on runway at dusk
+  MOOD:     Inspiring, premium, adventurous
+  SIZE:     1600×900 minimum (1920×1080 ideal)
+  USED ON:  Homepage full-screen hero, footer subtle texture, 404 page
+  AVOID:    Ground-only airport shots with no sky; cluttered tarmac close-ups
+
+hero-cta.jpg
+  TYPE:     Motivational travel / flight background
+  SUBJECT:  Airplane flying through clouds; OR jet contrails in blue sky;
+            OR aircraft taking off into golden light
+  MOOD:     Uplifting, “ready to book” energy
+  SIZE:     1600×600 or wider (banner-style)
+  USED ON:  Bottom CTA section (“Ready to find the best value flight?”)
+  AVOID:    Interior cabin shots; images too dark to read white text on top
+
+hero-airport.jpg
+  TYPE:     Modern airport / terminal scene
+  SUBJECT:  Bright airport terminal with travellers, departure gates, or
+            sleek architecture with glass and light
+  MOOD:     Professional, modern, busy but clean
+  SIZE:     800×600 or 1200×900 (4:3 ratio works well in hero side panel)
+  USED ON:  Homepage hero — right-side featured image
+  AVOID:    Blurry crowds; outdated or low-lit terminals
+
+
+================================================================================
+SUBPAGE HERO BANNERS (wide landscape banner, 1920×560 recommended)
+Prefix: sub-hero-   |   Local file is tried FIRST; Unsplash used only if missing.
+Put these in assets/images/ — separate from homepage hero-*.jpg card images.
+================================================================================
+
+sub-hero-compare.jpg
+  PAGE:     compare.html
+  TYPE:     Wide aviation / route comparison banner
+  SUBJECT:  Airplane wing above clouds; OR aerial route view; OR airport wide shot
+  SIZE:     1920×560 (or any wide landscape — cropped in CSS)
+
+sub-hero-predictor.jpg
+  PAGE:     predictor.html
+  TYPE:     Price trends / analytics banner
+  SUBJECT:  Charts, graphs, or dashboard on a screen showing data trends
+  SIZE:     1920×560
+
+sub-hero-route-finder.jpg
+  PAGE:     route-finder.html
+  TYPE:     Travel planning / map exploration banner
+  SUBJECT:  Map with pins; OR person planning routes; OR globe with flight paths
+  SIZE:     1920×560
+
+sub-hero-optimizer.jpg
+  PAGE:     optimizer.html
+  TYPE:     Airport / aviation infrastructure banner
+  SUBJECT:  Runway at golden hour; OR aerial airport view; OR planes at gates
+  SIZE:     1920×560
+
+sub-hero-heatmap.jpg
+  PAGE:     heatmap.html
+  TYPE:     Geographic / map visualization banner
+  SUBJECT:  Color-coded map; OR heatmap-style geo data; OR India map overlay
+  SIZE:     1920×560
+
+sub-hero-visualizations.jpg
+  PAGE:     visualizations.html
+  TYPE:     Business intelligence / dashboard banner
+  SUBJECT:  Multi-chart analytics dashboard; OR data reports on screen
+  SIZE:     1920×560
+
+sub-hero-faq.jpg
+  PAGE:     faq.html
+  TYPE:     Modern workspace / support banner
+  SUBJECT:  Clean office, desk with laptop, or bright co-working space
+  SIZE:     1920×560
+
+
+================================================================================
+HOMEPAGE FEATURE CARD IMAGES (local files — hero-*.jpg below)
+These are NOT used on subpage heroes — use sub-hero-*.jpg for tool page banners.
+================================================================================
+
+hero-compare.jpg
+  TYPE:     Data comparison / analytics
+  SUBJECT:  Side-by-side charts on a screen; OR balance scale concept;
+            OR split-screen analytics dashboard; OR two routes on a map
+  MOOD:     Analytical, clear, decision-making
+  USED ON:  Homepage “Compare Routes” feature card only
+  KEYWORDS: comparison, analytics, dashboard, charts
+
+hero-predictor.jpg
+  TYPE:     Price trends / financial charts
+  SUBJECT:  Line graph or bar chart on laptop/monitor; OR stock-style trend
+            chart; OR calendar + graph combo suggesting “best time to book”
+  MOOD:     Smart, predictive, data-driven
+  USED ON:  Homepage “Price Trends” feature card only
+  KEYWORDS: chart, graph, trends, statistics, forecast
+
+hero-route-finder.jpg
+  TYPE:     Travel planning / map exploration
+  SUBJECT:  World or India map with pins; OR passport + map + compass flat lay;
+            OR person pointing at route on a map; OR flight paths on a globe
+  MOOD:     Discovery, exploration, planning a trip
+  USED ON:  Homepage “Route Finder” feature card only
+  KEYWORDS: map, travel planning, routes, destination
+
+hero-optimizer.jpg
+  TYPE:     Airport / aviation infrastructure
+  SUBJECT:  Runway at golden hour; OR aerial view of airport; OR planes at
+            gates from terminal window; OR multiple airports / alternate routes
+  MOOD:     Efficient, strategic, “find a better option”
+  USED ON:  Homepage “Route Optimizer” feature card only
+  KEYWORDS: airport, runway, aviation, alternate airport
+
+hero-heatmap.jpg
+  TYPE:     Geographic / map visualization
+  SUBJECT:  Color-coded map (heatmap style); OR satellite map with overlays;
+            OR India map with highlighted regions; OR GIS / geo data visual
+  MOOD:     Spatial, overview, “see the whole picture”
+  USED ON:  Homepage “Cost Heatmap” feature card only
+  KEYWORDS: heatmap, geographic map, data visualization, regions
+
+hero-visualizations.jpg
+  TYPE:     Business intelligence / dashboard
+  SUBJECT:  Multi-panel analytics dashboard; OR bar/pie charts on dark UI;
+            OR data scientist workspace with charts on screen
+  MOOD:     Professional, comprehensive, data-rich
+  USED ON:  Homepage “Visualizations” feature card only
+  KEYWORDS: dashboard, BI, data visualization, reports
+
+hero-faq.jpg
+  TYPE:     Modern workspace / support / knowledge
+  SUBJECT:  Clean office desk with laptop; OR bright co-working space;
+            OR person researching on laptop in minimal workspace
+  MOOD:     Trustworthy, helpful, approachable
+  SIZE:     1600×600 for FAQ hero; same file reused at ~800px in About section
+  USED ON:  Homepage About split-section only (not FAQ page hero)
+  KEYWORDS: workspace, office, laptop, modern desk
+
+
+================================================================================
+HOW IT WORKS — STEP CARDS (landscape, 600×400 or 800×500)
+================================================================================
+
+step-planning.jpg
+  TYPE:     Travel planning / booking research
+  SUBJECT:  Person on laptop planning a trip; OR hands typing flight search;
+            OR notebook + phone with travel apps; OR calendar with travel dates
+  MOOD:     Step 1 — “Pick your routes”
+  KEYWORDS: planning, laptop, booking research, travel search
+
+step-analysis.jpg
+  TYPE:     Data analysis / metrics on screen
+  SUBJECT:  Dashboard with numbers and graphs; OR spreadsheet with flight data;
+            OR close-up of analytics screen showing prices or distances
+  MOOD:     Step 2 — “See the ₹/km breakdown”
+  KEYWORDS: analysis, metrics, dashboard, data breakdown
+
+step-booking.jpg
+  TYPE:     Airport departure / ready to fly
+  SUBJECT:  Traveller at departure gate with luggage; OR boarding pass + suitcase;
+            OR person walking toward airplane through jet bridge
+  MOOD:     Step 3 — “Make a better booking”
+  KEYWORDS: airport departure, traveller, boarding, suitcase
+  NOTE:     Can duplicate hero-airport.jpg if you prefer fewer files
+
+
+================================================================================
+TESTIMONIAL AVATARS (square headshots, 200×200 minimum, 400×400 ideal)
+================================================================================
+
+avatar-1.jpg
+  TYPE:     Professional headshot — male
+  SUBJECT:  Friendly male portrait, shoulders up, neutral or office background
+  MOOD:     “Rahul Sharma — Frequent flyer, Delhi”
+  STYLE:    Natural, approachable, well-lit face (circle crop in UI)
+
+avatar-2.jpg
+  TYPE:     Professional headshot — female
+  SUBJECT:  Friendly female portrait, shoulders up, clean background
+  MOOD:     “Priya Mehta — Travel blogger, Mumbai”
+  STYLE:    Warm, confident, travel/creative vibe optional
+
+avatar-3.jpg
+  TYPE:     Professional headshot — male
+  SUBJECT:  Friendly male portrait, business-casual look
+  MOOD:     “Arjun Patel — Business traveller, Bangalore”
+  STYLE:    Professional, sharp, neutral background
+
+  AVOID for all avatars: Full-body shots, group photos, cartoon/illustration
+  (unless you intentionally want illustrated avatars)
+
+
+================================================================================
+ROUTE CARD THUMBNAILS (landscape, 600×400 — top of each route card)
+Shown with dark gradient at bottom; city/landmark photos work best
+================================================================================
+
+route-default.jpg
+  TYPE:     Generic Indian aviation / travel
+  SUBJECT:  Generic airplane in sky; OR Indian airport exterior; OR plane
+            on tarmac — used when destination has no specific image
+  KEYWORDS: airplane, flight, generic travel
+
+route-del.jpg
+  TYPE:     Delhi city / landmark photo
+  SUBJECT:  India Gate, Red Fort, Qutub Minar, Delhi skyline, or Connaught Place
+  MOOD:     Recognizably Delhi — capital, historic + modern
+  KEYWORDS: Delhi, India Gate, monument, skyline
+
+route-bom.jpg
+  TYPE:     Mumbai city / landmark photo
+  SUBJECT:  Gateway of India, Marine Drive, Bandra-Worli Sea Link, Mumbai skyline
+  MOOD:     Coastal metropolis, iconic Mumbai
+  KEYWORDS: Mumbai, Gateway of India, skyline, sea link
+
+route-blr.jpg
+  TYPE:     Bangalore city photo
+  SUBJECT:  Vidhana Soudha, Bangalore skyline, Cubbon Park, or modern IT cityscape
+  MOOD:     Garden city / tech hub
+  KEYWORDS: Bangalore, Bengaluru, skyline, Karnataka
+
+route-hyd.jpg
+  TYPE:     Hyderabad city / landmark photo
+  SUBJECT:  Charminar, Hussain Sagar lake, Golconda Fort, or Hyderabad skyline
+  MOOD:     Historic Deccan city
+  KEYWORDS: Hyderabad, Charminar, Telangana
+
+route-maa.jpg
+  TYPE:     Chennai city / landmark photo
+  SUBJECT:  Marina Beach, Kapaleeshwarar Temple, Chennai skyline, or coastal view
+  MOOD:     South Indian coastal city
+  KEYWORDS: Chennai, Marina Beach, Tamil Nadu
+
+route-ccu.jpg
+  TYPE:     Kolkata city / landmark photo
+  SUBJECT:  Howrah Bridge, Victoria Memorial, yellow taxi + city street, Kolkata skyline
+  MOOD:     Cultural, historic, vibrant
+  KEYWORDS: Kolkata, Howrah Bridge, Victoria Memorial
+
+route-goi.jpg
+  TYPE:     Goa beach / travel photo
+  SUBJECT:  Goa beach, palm trees, coastal sunset, or colourful Goa streets
+  MOOD:     Relaxed, holiday, beach destination
+  KEYWORDS: Goa, beach, palm trees, coastal
+
+
+================================================================================
+QUICK CHECKLIST — MINIMUM SET (if you want to start with fewer files)
+================================================================================
+
+  Required (10 files):
+    hero-bg.jpg, hero-airport.jpg, hero-cta.jpg
+    hero-compare.jpg, hero-predictor.jpg, hero-route-finder.jpg
+    hero-optimizer.jpg, hero-heatmap.jpg, hero-visualizations.jpg, hero-faq.jpg
+
+  Recommended additions (12 files):
+    step-planning.jpg, step-analysis.jpg, step-booking.jpg
+    avatar-1.jpg, avatar-2.jpg, avatar-3.jpg
+    route-default.jpg + route-del/bom/blr/hyd/maa/ccu/goi.jpg
+
+  Reuse to save effort:
+    step-booking.jpg  → copy hero-airport.jpg
+    route-default.jpg → any generic airplane photo
+    Footer texture    → same as hero-bg.jpg (already configured in CSS)
+
+After adding files, open index.html in a browser to verify all images load.

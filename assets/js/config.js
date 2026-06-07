@@ -4,8 +4,12 @@
  */
 
 const CONFIG = {
-    // API base URL - using Render deployed backend
-    API_BASE_URL: 'https://flight-cost-intelligence-api.onrender.com',
+    // API base URL — localhost when developing, Render in production
+    API_BASE_URL: (window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.protocol === 'file:')
+        ? 'http://127.0.0.1:5000'
+        : 'https://flight-cost-intelligence-api.onrender.com',
     
     // API endpoints with their HTTP methods
     ENDPOINTS: {
@@ -15,7 +19,10 @@ const CONFIG = {
         CLASS_LAYOVER: '/api/class-layover',
         HEATMAP: '/api/heatmap',
         AIRPORTS: '/api/airports',
-        DUMMY_COMPARE: '/api/route-find'
+        ROUTE_FIND: '/api/route-find',
+        VISUALIZATIONS: '/api/visualizations',
+        RAW_COMPARE: '/api/raw-compare-data',
+        PING: '/api/ping'
     },
     
     // HTTP methods for each endpoint
@@ -26,7 +33,10 @@ const CONFIG = {
         CLASS_LAYOVER: 'GET',
         HEATMAP: 'GET',
         AIRPORTS: 'GET',
-        DUMMY_COMPARE: 'POST'
+        ROUTE_FIND: 'POST',
+        VISUALIZATIONS: 'GET',
+        RAW_COMPARE: 'GET',
+        PING: 'GET'
     },
     
     // Indian airport codes for quick selection
@@ -102,145 +112,3 @@ const CONFIG = {
         minZoom: 3
     }
 };
-
-/**
- * Helper function to make API calls
- * @param {string} endpoint - API endpoint from CONFIG.ENDPOINTS
- * @param {Object} data - Data to send (for POST requests)
- * @returns {Promise} - Promise with API response
- */
-async function callAPI(endpoint, data = null) {
-    // Get the correct HTTP method for this endpoint
-    const endpointKey = Object.keys(CONFIG.ENDPOINTS).find(key => CONFIG.ENDPOINTS[key] === endpoint);
-    const method = endpointKey ? CONFIG.HTTP_METHODS[endpointKey] : 'GET';
-    const url = CONFIG.API_BASE_URL + endpoint;
-    
-    const options = {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-    
-    if (data && method === 'POST') {
-        options.body = JSON.stringify(data);
-    }
-    
-    try {
-        const response = await fetch(url, options);
-        
-        if (!response.ok) {
-            throw new Error(`API call failed: ${response.status} ${response.statusText}`);
-        }
-        
-        return await response.json();
-    } catch (error) {
-        console.error('API call error:', error);
-        throw error;
-    }
-}
-
-/**
- * Format currency
- * @param {number} amount - Amount to format
- * @param {string} currency - Currency code (default: INR)
- * @returns {string} - Formatted currency string
- */
-function formatCurrency(amount, currency = 'INR') {
-    return new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: currency
-    }).format(amount);
-}
-
-/**
- * Format number with commas and decimal places
- * @param {number} number - Number to format
- * @param {number} decimals - Number of decimal places
- * @returns {string} - Formatted number string
- */
-function formatNumber(number, decimals = 2) {
-    return new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals
-    }).format(number);
-}
-
-/**
- * Show loading spinner
- * @param {string} elementId - ID of element to show spinner in
- * @param {string} message - Optional loading message
- */
-function showLoading(elementId, message = 'Loading...') {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.innerHTML = `
-            <div class="text-center p-3">
-                <div class="spinner"></div>
-                <p class="mt-2">${message}</p>
-            </div>
-        `;
-    }
-}
-
-/**
- * Show error message
- * @param {string} elementId - ID of element to show error in
- * @param {string} message - Error message
- */
-function showError(elementId, message) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.innerHTML = `
-            <div class="alert alert-danger">
-                <strong>Error:</strong> ${message}
-            </div>
-        `;
-    }
-}
-
-/**
- * Populate airport select dropdown
- * @param {string} selectId - ID of select element
- * @param {boolean} addEmptyOption - Whether to add an empty first option
- */
-function populateAirportSelect(selectId, addEmptyOption = true) {
-    const select = document.getElementById(selectId);
-    if (!select) return;
-    
-    // Clear existing options
-    select.innerHTML = '';
-    
-    // Add empty option if requested
-    if (addEmptyOption) {
-        const emptyOption = document.createElement('option');
-        emptyOption.value = '';
-        emptyOption.textContent = 'Select Airport';
-        select.appendChild(emptyOption);
-    }
-    
-    // Group airports by country
-    const airportsByCountry = {};
-    
-    CONFIG.POPULAR_AIRPORTS.forEach(airport => {
-        if (!airportsByCountry[airport.country]) {
-            airportsByCountry[airport.country] = [];
-        }
-        airportsByCountry[airport.country].push(airport);
-    });
-    
-    // Add options grouped by country
-    Object.keys(airportsByCountry).sort().forEach(country => {
-        const optgroup = document.createElement('optgroup');
-        optgroup.label = country;
-        
-        airportsByCountry[country].forEach(airport => {
-            const option = document.createElement('option');
-            option.value = airport.code;
-            option.textContent = `${airport.name} (${airport.code})`;
-            optgroup.appendChild(option);
-        });
-        
-        select.appendChild(optgroup);
-    });
-}

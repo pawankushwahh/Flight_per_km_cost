@@ -13,8 +13,8 @@
       color:var(--text-secondary); border-bottom:2px solid transparent; margin-bottom:-2px;
       transition:all var(--transition-fast); border-radius:var(--radius-sm) var(--radius-sm) 0 0;
     }
-    .viz-tab:hover { color:var(--sky); background:var(--gray-50); }
-    .viz-tab.active { color:var(--sky); border-bottom-color:var(--sky); }
+    .viz-tab:hover { color:var(--accent); background:rgba(255,255,255,0.04); }
+    .viz-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
     .viz-pane { display:none; }
     .viz-pane.active { display:block; }
 
@@ -34,14 +34,19 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li><li><a href="compare.html">Compare</a></li>
       <li><a href="route-finder.html">Route Finder</a></li><li><a href="predictor.html">Predictor</a></li>
-      <li><a href="optimizer.html">Optimizer</a></li><li><a href="heatmap.html">Heatmap</a></li>
+      <li><a href="optimizer.html">Optimizer</a></li>      <li><a href="heatmap.html">Heatmap</a></li>
+      <li><a href="visualizations.html" class="active">Visualizations</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
     <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
-<section class="hero hero-sub">
+<section class="hero hero-sub" data-hero="visualizations">
+  <div class="hero-bg">
+    <img src="assets/images/sub-hero-visualizations.jpg" alt="Business intelligence dashboard with charts">
+  </div>
+  <div class="hero-overlay"></div>
   <div class="container text-center">
     <h1>Data Visualizations</h1>
     <p>Charts and rankings built from the full Indian domestic flight dataset.</p>
@@ -154,8 +159,9 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="assets/js/config.js"></script>
+<script src="assets/js/images.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
 let cheapChart = null, expChart = null, cityChart = null;
@@ -338,12 +344,7 @@ document.getElementById('table-search').addEventListener('input', function() {
 
 document.getElementById('reload-btn').addEventListener('click', loadViz);
 
-// FIX: limit change is now client-side — no extra network request
-document.getElementById('limit-select').addEventListener('change', () => {
-  if (!vizData) return;
-  const limit = parseInt(document.getElementById('limit-select').value, 10);
-  render(vizData, limit);
-});
+document.getElementById('limit-select').addEventListener('change', loadViz);
 
 loadViz();
 </script>

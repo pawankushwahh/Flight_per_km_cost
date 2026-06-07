@@ -20,13 +20,18 @@
       <li><a href="predictor.html">Predictor</a></li>
       <li><a href="optimizer.html">Optimizer</a></li>
       <li><a href="heatmap.html">Heatmap</a></li>
+      <li><a href="visualizations.html">Visualizations</a></li>
       <li><a href="faq.html">FAQ</a></li>
     </ul>
     <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
-<section class="hero hero-sub">
+<section class="hero hero-sub" data-hero="compare">
+  <div class="hero-bg">
+    <img src="assets/images/sub-hero-compare.jpg" alt="Airplane wing above clouds — route comparison">
+  </div>
+  <div class="hero-overlay"></div>
   <div class="container text-center">
     <h1>Compare Routes by ₹ per km</h1>
     <p>Add up to 5 routes and instantly see which offers the best value per kilometre.</p>
@@ -44,20 +49,17 @@
           <button id="add-route-btn" class="btn btn-ghost btn-sm">
             <i class="fas fa-plus"></i> Add another route
           </button>
-          <button id="share-btn" class="btn btn-ghost" style="display:none;" onclick="shareCmp()"><i class="fas fa-share-nodes"></i> Share</button>
           <button id="compare-btn" class="btn btn-primary">
             <i class="fas fa-search"></i> Compare routes
           </button>
-          <button id="share-btn" class="btn btn-ghost" onclick="copyShareUrl()" style="display:none;">
-            <i class="fas fa-share-nodes"></i> Share
-          </button>
+          <button id="share-btn" class="btn btn-ghost" style="display:none;" onclick="shareCmp()"><i class="fas fa-share-nodes"></i> Share</button>
         </div>
       </div>
     </div>
 
     <!-- Results -->
     <div id="results-section" style="display:none;">
-      <div id="share-btn-wrap" class="mb-2" style="text-align:right;"></div>
+      <div id="compare-warnings" class="mb-2"></div>
       <!-- Summary Cards -->
       <div id="summary-cards" class="mb-3"></div>
 
@@ -110,9 +112,10 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="assets/js/config.js"></script>
+<script src="assets/js/images.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
 let routeCount = 0;
@@ -209,6 +212,7 @@ document.getElementById('compare-btn').addEventListener('click', async () => {
 
   const sec = document.getElementById('results-section');
   sec.style.display = 'block';
+  document.getElementById('compare-warnings').innerHTML = '';
   document.getElementById('summary-cards').innerHTML =
     '<div class="spinner-wrap"><div class="spinner"></div><span>Analysing routes…</span></div>';
   document.getElementById('comparison-tbody').innerHTML = '';
@@ -216,7 +220,19 @@ document.getElementById('compare-btn').addEventListener('click', async () => {
 
   try {
     const res = await apiCall(CONFIG.ENDPOINTS.COMPARE, { routes });
-    if (!res.success || !res.data || !res.data.length) throw new Error(res.error || 'No matching routes found in the dataset.');
+    if (!res.success) throw new Error(res.error || 'Comparison failed.');
+    const warnings = [];
+    (res.skipped || []).forEach(r => {
+      warnings.push(`${r.origin || '?'} → ${r.destination || '?'}: ${r.reason}`);
+    });
+    (res.not_found || []).forEach(r => {
+      warnings.push(`${r.origin} → ${r.destination}: not in dataset`);
+    });
+    if (warnings.length) {
+      document.getElementById('compare-warnings').innerHTML =
+        `<div class="alert alert-warning"><i class="fas fa-info-circle"></i> ${warnings.join('; ')}</div>`;
+    }
+    if (!res.data || !res.data.length) throw new Error('No matching routes found in the dataset.');
     lastResults = res.data.sort((a, b) => a.cost_per_km - b.cost_per_km);
     renderSummary(lastResults);
     renderTable(lastResults);

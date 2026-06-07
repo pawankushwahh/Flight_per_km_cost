@@ -1,70 +1,114 @@
-# ✈️ Flight Cost Intelligence
+# Flight Cost Intelligence — Frontend
 
-> A college project built to make Indian domestic air travel more transparent — by comparing flights on **₹ per kilometre**, not just total price.
+> Indian domestic flight analysis by **₹ per kilometre** — not just total price.
 
-> 📌 *This project was built as part of our college curriculum. Feel free to explore the code — it is not actively maintained.*
+| | |
+|---|---|
+| **Live site** | https://pawankushwahh.github.io/Flight_per_km_cost/ |
+| **This repo** | https://github.com/pawankushwahh/Flight_per_km_cost |
+| **Backend API** | https://flight-cost-intelligence-api.onrender.com |
+| **Backend repo** | https://github.com/pawankushwahh/Flight_per_km_backend |
 
----
-### live at https://pawankushwahh.github.io/Flight_per_km_cost/
----
-
-## 🎓 About This Project
-
-Most travellers compare total flight prices — but a ₹3,000 Delhi–Mumbai ticket and a ₹3,000 Delhi–Kolkata ticket are **not equally priced**. One covers far more distance for the same money.
-
-This project solves that by calculating the **₹ per km** for every Indian domestic route and presenting it through a suite of six analysis tools, all connected to a custom REST backend.
-
-Built as a full-stack college group project to demonstrate skills in frontend development, REST API integration, data visualisation, and responsive UI design.
+This is a **standalone frontend repo**. It is deployed on GitHub Pages and calls the Flask API hosted separately on Render.
 
 ---
 
-## 🌐 Repositories
+## About
 
-| Layer | Link |
-|-------|------|
-| **Frontend** (this repo) | [Flight_per_km_cost](https://github.com/pawankushwahh/Flight_per_km_cost) |
-| **Backend** | [Flight_per_km_backend](https://github.com/pawankushwahh/Flight_per_km_backend) |
+Most travellers compare total fares — but a ₹3,000 short-hop and a ₹3,000 long-haul are not equal value. This app normalises every route to **₹/km** so you can compare fairly.
 
----
-
-## 🖥️ Pages & Features
-
-| Page | File | Description |
-|------|------|-------------|
-| **Home** | `index.html` | Landing page with quick compare widget, live popular routes, and stats |
-| **Route Compare** | `compare.html` | Side-by-side ₹/km comparison with chart and route map |
-| **Price Predictor** | `predictor.html` | Monthly price trends with cheapest month and best booking advice |
-| **Route Finder** | `route-finder.html` | All destinations from a city, ranked by cost per km |
-| **Route Optimizer** | `optimizer.html` | Nearby alternative airports and layover cost analysis |
-| **Cost Heatmap** | `heatmap.html` | Geographic view of flight costs across India |
-| **Visualizations** | `visualizations.html` | Advanced charts — cheapest routes, most expensive, city averages |
-| **FAQ** | `faq.html` | Methodology and frequently asked questions |
+Eight analysis pages connect to the backend over REST/JSON. No build step, no framework — pure HTML, CSS, and JavaScript.
 
 ---
 
-## 🛠️ Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| Frontend | HTML5, CSS3, JavaScript (Vanilla ES6+) |
-| Icons | Font Awesome 6.4 |
-| Charts | Chart.js |
-| API Communication | REST / JSON via `fetch` API |
-| Backend | Node.js + Express (separate repo) |
-| Deployment | Vercel / Render / GitHub Pages |
-
----
-
-## 📁 Project Structure
+## How it connects to the backend
 
 ```
-Flight_per_km_cost/
+Browser (GitHub Pages)
+        │
+        ▼  fetch JSON
+Render API (flight-cost-intelligence-api.onrender.com)
+        │
+        ▼  reads at startup
+CSV + JSON data files (in backend repo)
+```
+
+The API URL is set in [`assets/js/config.js`](assets/js/config.js):
+
+| Where you open the site | `API_BASE_URL` |
+|-------------------------|----------------|
+| `localhost` / `127.0.0.1` | `http://127.0.0.1:5000` |
+| `file://` (opening HTML directly) | `http://127.0.0.1:5000` |
+| GitHub Pages / production | `https://flight-cost-intelligence-api.onrender.com` |
+
+Shared helpers live in [`assets/js/common.js`](assets/js/common.js) (`apiCall`, `fetchAirports`, formatting). A background ping to `/api/ping` warms the Render server on first load.
+
+---
+
+## Pages
+
+| Page | File | What it does |
+|------|------|--------------|
+| Home | `index.html` | Quick compare, popular routes, live stats |
+| Route Compare | `compare.html` | Multi-route ₹/km table, chart, map |
+| Price Predictor | `predictor.html` | Monthly trends, best booking month |
+| Route Finder | `route-finder.html` | All destinations from one origin |
+| Route Optimizer | `optimizer.html` | Nearby airports, cabin classes, layovers |
+| Cost Heatmap | `heatmap.html` | India map coloured by ₹/km |
+| Visualizations | `visualizations.html` | Cheapest/expensive routes, city averages |
+| FAQ | `faq.html` | Methodology and technical info |
+
+---
+
+## API endpoints used
+
+| Endpoint | Method | Used on |
+|----------|--------|---------|
+| `/api/ping` | GET | All pages (server warm-up) |
+| `/api/airports` | GET | All pages with dropdowns |
+| `/api/compare` | POST | Compare |
+| `/api/predict` | POST | Predictor |
+| `/api/route-find` | POST | Route Finder |
+| `/api/nearby-airports` | GET | Optimizer |
+| `/api/class-layover` | GET | Optimizer |
+| `/api/heatmap` | GET | Heatmap |
+| `/api/visualizations` | GET | Visualizations, Home stats |
+| `/api/raw-compare-data` | GET | Home popular routes |
+
+**Home page fallback:** If `/api/raw-compare-data` lacks `cost_per_km`, the home page automatically falls back to `/api/visualizations` so popular routes still load.
+
+For full API and data documentation, see the [backend repo](https://github.com/pawankushwahh/Flight_per_km_backend).
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|-------|------------|
+| Markup / style / logic | HTML5, CSS3, Vanilla ES6+ |
+| Icons | Font Awesome 6.4 |
+| Charts | Chart.js 4.4.1 |
+| Maps | Leaflet 1.9.4 |
+| API | REST / JSON via `fetch` |
+| Backend | Python Flask ([separate repo](https://github.com/pawankushwahh/Flight_per_km_backend)) |
+| Hosting | GitHub Pages |
+
+---
+
+## Project structure
+
+```
 ├── assets/
 │   ├── css/
-│   │   └── main.css          # Global design system
+│   │   └── main.css           # Design system (dark theme, responsive)
+│   ├── images/                # Hero, route, and step photos
+│   │   └── IMAGES.txt         # Image inventory
 │   └── js/
-│       ├── config.js         # API base URL and endpoint config
-│       └── common.js         # Shared helpers across all pages
+│       ├── config.js          # API URL + endpoint map
+│       ├── common.js          # apiCall, airports, formatting, share URLs
+│       └── images.js          # Route thumbnail paths
+├── docs/
+│   └── DEPLOYMENT.md          # GitHub Pages deploy guide
 ├── index.html
 ├── compare.html
 ├── predictor.html
@@ -73,67 +117,108 @@ Flight_per_km_cost/
 ├── heatmap.html
 ├── visualizations.html
 ├── faq.html
+├── 404.html
 └── README.md
 ```
 
 ---
 
-## 📡 API Endpoints
+## Run locally
 
-| Endpoint | Description |
-|----------|-------------|
-| `/api/airports` | List of all airport codes for dropdowns |
-| `/api/compare` | Route price and ₹/km comparison |
-| `/api/predict` | Monthly price trends and best booking time |
-| `/api/nearby-airports` | Alternative airports near a city |
-| `/api/class-layover` | Class and layover cost details |
-| `/api/heatmap` | Geographic pricing data |
-| `/api/raw-compare-data` | Full dataset for the home page routes grid |
+You need **both repos** running — clone them separately.
 
----
+### 1. Clone and start the backend
 
-## ⚙️ Run Locally
+```bash
+git clone https://github.com/pawankushwahh/Flight_per_km_backend.git
+cd Flight_per_km_backend
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
 
-No build step needed — it's a pure static frontend.
+Backend runs at http://127.0.0.1:5000
+
+### 2. Clone and serve this frontend
 
 ```bash
 git clone https://github.com/pawankushwahh/Flight_per_km_cost.git
 cd Flight_per_km_cost
-
-# Serve locally (recommended over opening index.html directly)
-python -m http.server 5500
-# or
-npx serve .
+python3 -m http.server 5500
 ```
 
-Then open `http://localhost:5500` in your browser.
+Open **http://localhost:5500** in your browser.
 
-> To connect to the backend, update `API_BASE_URL` in `assets/js/config.js` with your backend URL.
+`config.js` auto-detects localhost and points to `http://127.0.0.1:5000`.
 
 ---
 
-## 💡 The Core Idea
+## Deploy to GitHub Pages
+
+Push to this repo's `main` branch — GitHub Pages auto-deploys in 1–3 minutes.
+
+```bash
+git add .
+git commit -m "Describe your changes"
+git push origin main
+```
+
+Live at: https://pawankushwahh.github.io/Flight_per_km_cost/
+
+Full guide: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+
+### Coordinating with the backend repo
+
+| You changed… | Push this frontend repo? | Push backend repo? |
+|--------------|:------------------------:|:------------------:|
+| HTML, CSS, JS, images only | Yes | No |
+| `config.js` API URL | Yes | No |
+| Backend API or data files | No | Yes (push backend **first**) |
+| Both UI and API/data | Yes | Yes (backend first, then frontend) |
+
+The live site always calls the Render API — not your local backend.
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| "Could not load route data" on Home | Push latest backend to Render, or run backend locally on port 5000 |
+| Slow first load (30–60 s) | Render free-tier cold start — wait and refresh |
+| Dropdowns empty | `/api/airports` failed — check `config.js` API URL |
+| CORS errors | Backend needs `flask-cors` (enabled in backend repo) |
+| Maps/charts broken | Check browser console; ensure CDN scripts load |
+
+---
+
+## Core formula
 
 ```
 ₹ per km  =  Total Ticket Price (₹)  ÷  Route Distance (km)
 ```
 
-A lower ₹/km = better value — regardless of the total price shown on booking sites.
+Lower ₹/km = better value per kilometre flown.
 
 ---
 
-## 👥 Team
+## Documentation in this repo
 
-This project was built by a group of three college students:
+| File | Contents |
+|------|----------|
+| [README.md](README.md) | This file — setup, pages, API connection |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Pages deploy and post-push checklist |
+
+Backend data formats and API details: [Flight_per_km_backend](https://github.com/pawankushwahh/Flight_per_km_backend) → `docs/DATA.md`
+
+---
+
+## Team
 
 | Name | GitHub |
 |------|--------|
-| **Pawan Kushwah** | [@pawankushwahh](https://github.com/pawankushwahh) |
-| **Rakshita** |   [@Rakshita-0206](https://github.com/Rakshita-0206) |
-| **Shalini** | — |
+| Pawan Kushwah | [@pawankushwahh](https://github.com/pawankushwahh) |
+| Rakshita | [@Rakshita-0206](https://github.com/Rakshita-0206) |
+| Shalini | — |
 
-📍 Lucknow, India
-
----
-
-> Made with ❤️ to make Indian domestic air travel more transparent.
+Lucknow, India
